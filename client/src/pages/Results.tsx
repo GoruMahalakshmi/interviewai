@@ -6,7 +6,7 @@ import confetti from 'canvas-confetti';
 import { motion } from "framer-motion";
 import { 
   CheckCircle2, AlertTriangle, ArrowRight, Download, Share2, 
-  Calendar, Briefcase, Trophy, Zap
+  Calendar, Briefcase, Trophy, Zap, User
 } from "lucide-react";
 
 import { useAssessment } from "@/hooks/use-assessments";
