@@ -23,19 +23,17 @@ export async function registerRoutes(
       // --- SCORING LOGIC ---
       
       // 1. Technical (40% Total)
-      // MCQ: 15%
+      // Role-specific MCQ: 15%
       // Self-Rating: 25%
       
-      // Define correct answers map
-      const correctAnswers: Record<string, string> = {
-        'frontend': 'Side effects',
-        'backend': 'FETCH',
-        'fullstack': 'Atomicity Consistency Isolation Durability',
-        'mobile': 'FlatList'
+      const roleQuestions: Record<string, { q: string, a: string }> = {
+        'frontend': { q: 'What is a closure in JavaScript?', a: 'Function with access to its lexical scope' },
+        'backend': { q: 'What does ACID stand for in databases?', a: 'Atomicity Consistency Isolation Durability' },
+        'fullstack': { q: 'What is the purpose of a JWT?', a: 'Securely transmitting information between parties' },
+        'mobile': { q: 'What is the bridge in React Native?', a: 'Layer between JavaScript and Native code' }
       };
 
-      const correctAnswer = correctAnswers[input.role];
-      const isMcqCorrect = input.technicalMcqAnswer === correctAnswer;
+      const isMcqCorrect = input.technicalMcqAnswer?.toLowerCase().includes(roleQuestions[input.role]?.a.toLowerCase().split(' ')[0] || "correct");
       
       const scoreMcq = isMcqCorrect ? 15 : 0;
       const scoreSelfRating = Math.round((input.technicalSelfRating / 10) * 25);
