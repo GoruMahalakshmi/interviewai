@@ -40,6 +40,7 @@ export const assessments = pgTable("assessments", {
   improvementPlan: jsonb("improvement_plan").notNull(), // Array of day-by-day plan
   
   aiFeedback: text("ai_feedback"), // Optional personalized AI text
+  estimatedDays: integer("estimated_days"), // Timeline estimate
 });
 
 export const insertAssessmentSchema = createInsertSchema(assessments).omit({ 

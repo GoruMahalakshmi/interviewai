@@ -81,6 +81,7 @@ export async function registerRoutes(
           - "gaps": array of 3 strings
           - "improvement_plan": array of 3 strings (Day 1-2, Day 3-5, Day 6-7 actions)
           - "feedback": A short, encouraging summary paragraph (max 2 sentences).
+          - "estimated_days": An integer representing how many days it will take to be fully ready (e.g., 7, 14, 21).
         `;
 
         const completion = await openai.chat.completions.create({
@@ -94,31 +95,24 @@ export async function registerRoutes(
         gaps = aiResponse.gaps || ["General technical review needed"];
         improvementPlan = aiResponse.improvement_plan || ["Review basics", "Build a project", "Practice mock interviews"];
         aiFeedback = aiResponse.feedback || "Keep learning and practicing!";
+        const estimatedDays = aiResponse.estimated_days || (totalScore > 80 ? 7 : 14);
 
-      } catch (error) {
-        console.error("OpenAI Error:", error);
-        // Fallback if AI fails
-        strengths = ["Took the first step"];
-        gaps = ["Complete the full assessment"];
-        improvementPlan = ["Update resume", "Build portfolio", "Practice coding"];
-        aiFeedback = "We couldn't generate personalized feedback right now, but keep pushing forward!";
-      }
-
-      // --- SAVE TO DB ---
-      const assessmentData: InsertAssessment = {
-        ...input,
-        technicalMcqCorrect: isMcqCorrect,
-        scoreTechnical,
-        scoreResume,
-        scoreCommunication,
-        scorePortfolio,
-        totalScore,
-        readinessLevel,
-        strengths: strengths, // Drizzle handles JSON array
-        gaps: gaps,
-        improvementPlan: improvementPlan,
-        aiFeedback
-      };
+        // --- SAVE TO DB ---
+        const assessmentData: InsertAssessment = {
+          ...input,
+          technicalMcqCorrect: isMcqCorrect,
+          scoreTechnical,
+          scoreResume,
+          scoreCommunication,
+          scorePortfolio,
+          totalScore,
+          readinessLevel,
+          strengths: strengths, // Drizzle handles JSON array
+          gaps: gaps,
+          improvementPlan: improvementPlan,
+          aiFeedback,
+          estimatedDays
+        };
 
       const result = await storage.createAssessment(assessmentData);
       res.status(201).json(result);

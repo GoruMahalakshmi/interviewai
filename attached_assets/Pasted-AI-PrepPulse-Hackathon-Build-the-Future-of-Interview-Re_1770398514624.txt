@@ -1,0 +1,53 @@
+AI PrepPulse Hackathon 
+Build the Future of Interview Readiness 
+THE CHALLENGE: 
+Every year, millions of students graduate and enter the job market, but many struggle to 
+assess whether they're truly ready for interviews. They often discover gaps in their 
+preparation only after failed interviews - when it's too late. 
+Your Mission: Create an innovative tool that helps students objectively measure their 
+interview readiness and identify areas for improvement BEFORE they face real recruiters. 
+PROBLEM STATEMENT: 
+Design and develop a solution that evaluates different aspects of interview preparation 
+like Technical Skills, Resume, Communication gaps, Portfolio. 
+Create a tool that assesses a student’s profile and provides an overall "Interview 
+Readiness Score" with personalized improvement plans. 
+Important Note: The evaluation process via this tool should not take more than 2 min. 
+of total time spent by the candidate. 
+DELIVERABLES: 
+● Working Prototype - A functional MVP enabling candidates to instantly gauge 
+their interview readiness in less than 2 minutes. 
+● Readiness Metric - A clear scoring/rating system (e.g., 0-100 score, 
+beginner/intermediate/expert levels or something else)  
+● Actionable Feedback - Specific suggestions for improvement, not just scores 
+● User-Friendly Interface - Clean, intuitive design that students can navigate easily  
+● Demo/Presentation - 5-minute video pitch explaining your solution 
+EVALUATION CRITERIA: 
+● Impact (20%) - How effectively does it assess interview readiness in under 2 min. 
+effort of the user? 
+● Innovation (20%) - Is the approach creative and unique? 
+● Technical Execution (20%) - Code quality and functionality including ReadMe 
+f
+ile quality. 
+● User Experience (25%) – Design, ease of use, and clarity of feedback; hosted and 
+publicly accessible solutions will receive bonus consideration. 
+● Presentation (15%) - Quality of demo video and explanation. 
+SUCCESS LOOKS LIKE: 
+A student uses your tool for less than 2 min. and walks away knowing: 
+● ✓ Their current interview readiness level (scored/rated) 
+● ✓ Specific strengths to leverage 
+● ✓ Concrete gaps to address 
+● ✓ Clear next steps to improve 
+● ✓ Timeline estimate to become interview-ready 
+WHO WINS? 
+The Person that builds the most practical, innovative, and impactful tool that genuinely 
+helps students bridge the gap between preparation and interview success as per the 
+evaluation criteria mentioned above. 
+Ready to build? Let's help students crack their dream interviews! 
+Submission Guidelines: 
+● Users must submit the link to their GitHub repository on the competition portal 
+(Unstop, where you completed your hackathon registration). 
+● The GitHub repository must be public. Private repositories will lead to 
+disqualification. 
+● Hosting the project is optional but will give you an edge during evaluation. 
+● Mandatory: Include a screen-recording video of your live, working project in the 
+README.md of your GitHub repository. 
