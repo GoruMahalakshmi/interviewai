@@ -63,6 +63,7 @@ export async function registerRoutes(
       let strengths: string[] = [];
       let gaps: string[] = [];
       let improvementPlan: string[] = [];
+      let estimatedDays = 14;
 
       try {
         const prompt = `
@@ -95,24 +96,34 @@ export async function registerRoutes(
         gaps = aiResponse.gaps || ["General technical review needed"];
         improvementPlan = aiResponse.improvement_plan || ["Review basics", "Build a project", "Practice mock interviews"];
         aiFeedback = aiResponse.feedback || "Keep learning and practicing!";
-        const estimatedDays = aiResponse.estimated_days || (totalScore > 80 ? 7 : 14);
+        estimatedDays = aiResponse.estimated_days || (totalScore > 80 ? 7 : 14);
 
-        // --- SAVE TO DB ---
-        const assessmentData: InsertAssessment = {
-          ...input,
-          technicalMcqCorrect: isMcqCorrect,
-          scoreTechnical,
-          scoreResume,
-          scoreCommunication,
-          scorePortfolio,
-          totalScore,
-          readinessLevel,
-          strengths: strengths, // Drizzle handles JSON array
-          gaps: gaps,
-          improvementPlan: improvementPlan,
-          aiFeedback,
-          estimatedDays
-        };
+      } catch (error) {
+        console.error("OpenAI Error:", error);
+        // Fallback if AI fails
+        strengths = ["Took the first step"];
+        gaps = ["Complete the full assessment"];
+        improvementPlan = ["Update resume", "Build portfolio", "Practice coding"];
+        aiFeedback = "We couldn't generate personalized feedback right now, but keep pushing forward!";
+        estimatedDays = (totalScore > 80 ? 7 : 14);
+      }
+
+      // --- SAVE TO DB ---
+      const assessmentData: InsertAssessment = {
+        ...input,
+        technicalMcqCorrect: isMcqCorrect,
+        scoreTechnical,
+        scoreResume,
+        scoreCommunication,
+        scorePortfolio,
+        totalScore,
+        readinessLevel,
+        strengths: strengths,
+        gaps: gaps,
+        improvementPlan: improvementPlan,
+        aiFeedback,
+        estimatedDays
+      };
 
       const result = await storage.createAssessment(assessmentData);
       res.status(201).json(result);

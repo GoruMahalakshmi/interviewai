@@ -164,7 +164,7 @@ export default function Results() {
         >
           <div className="flex items-center gap-2 mb-6">
             <Calendar className="w-6 h-6 text-primary" />
-            <h2 className="text-2xl font-bold text-slate-900 font-display">Your Personalized Study Plan</h2>
+            <h2 className="text-2xl font-bold text-slate-900 font-display">Your Personalized {assessment.estimatedDays}-Day Study Plan</h2>
           </div>
           
           <div className="grid gap-4 md:grid-cols-3">
