@@ -1,5 +1,5 @@
 import { db } from "./db";
-import { assessments, type InsertAssessment, type Assessment } from "@shared/schema";
+import { assessments, type Assessment, type InsertAssessment } from "@shared/schema";
 import { eq } from "drizzle-orm";
 
 export interface IStorage {
@@ -17,10 +17,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getAssessment(id: number): Promise<Assessment | undefined> {
-    const [assessment] = await db
-      .select()
-      .from(assessments)
-      .where(eq(assessments.id, id));
+    const [assessment] = await db.select().from(assessments).where(eq(assessments.id, id));
     return assessment;
   }
 }

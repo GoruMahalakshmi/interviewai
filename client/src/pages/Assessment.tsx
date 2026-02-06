@@ -238,16 +238,16 @@ export default function Assessment() {
                     </div>
                   </div>
 
-                  {/* MCQ Question */}
-                  {role && MCQ_QUESTIONS[role] && (
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded">Quick Quiz</span>
-                        <Label className="text-lg font-medium">{MCQ_QUESTIONS[role].question}</Label>
-                      </div>
-                      
+                    <div className="space-y-4 pt-4">
+                      <Label className="text-base font-semibold">
+                        {watch("role") && MCQ_QUESTIONS[watch("role") as string] 
+                          ? MCQ_QUESTIONS[watch("role") as string].question 
+                          : "Quick Check: What is the primary purpose of useEffect in React?"}
+                      </Label>
                       <div className="grid gap-3">
-                        {MCQ_QUESTIONS[role].options.map((option) => (
+                        {(watch("role") && MCQ_QUESTIONS[watch("role") as string] 
+                          ? MCQ_QUESTIONS[watch("role") as string].options 
+                          : ["State management", "Side effects", "Routing", "Styling"]).map((option) => (
                           <div
                             key={option}
                             onClick={() => setValue("technicalMcqAnswer", option, { shouldValidate: true })}
@@ -256,6 +256,7 @@ export default function Assessment() {
                                 ? "border-primary bg-primary/5 shadow-md"
                                 : "border-slate-100 hover:border-slate-300 hover:bg-slate-50"
                             }`}
+                            data-testid={`option-${option.toLowerCase().replace(/\s+/g, '-')}`}
                           >
                             <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                               watch("technicalMcqAnswer") === option ? "border-primary" : "border-slate-300"
@@ -270,7 +271,6 @@ export default function Assessment() {
                       </div>
                       {errors.technicalMcqAnswer && <p className="text-red-500 text-sm">{errors.technicalMcqAnswer.message}</p>}
                     </div>
-                  )}
                 </motion.div>
               )}
 
